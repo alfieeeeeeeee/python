@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 # 可变类型和不可变类型在于是否发生局部修改，全局修改相当于重新赋值，所有类型都可以
 # 可变类型：列表
@@ -467,6 +466,7 @@ print(f"三个集合的并集: {union_all}")
 # 多个集合的交集
 intersection_all = set1.intersection(set2, set3)
 print(f"三个集合的交集: {intersection_all}")
+"""
 
 """
 我们将__init__()方法定义成包含三个形参：self、name和age。在这个方法的定义中，形参self必不可少，
