@@ -5,9 +5,7 @@ import matplotlib.pyplot as plt
 其实Matplotlib还支持三维绘图，不过需要额外导入mpl_toolkits.mplot3d.axes3d模块。
 我们需要在实例化子图类型时指定projection为3D，接下来不论是绘制散点图、曲线图，还是给图形添加文字注释，方法都与绘制二维图形相同，区别仅是多出了一个维度。
 """
-
 fig = plt.figure(figsize=(20, 10))  # 创建一个大小为 20x10 英寸的图形对象
-
 
 ax1 = fig.add_subplot(221, projection='3d') # 在图形中添加一个子图，221 表示 2x2 网格中的第一个子图，projection='3d' 表示创建三维坐标轴
 theta = np.linspace(-4 * np.pi, 4 * np.pi, 500) # 生成在 -4π 到 4π 之间均匀分布的 500 个点，作为角度值
@@ -36,7 +34,7 @@ ax2.set_zlabel('z', fontsize=15)  # 设置 z 轴标签，字体大小为 15
 
 ax3 = fig.add_subplot(223, projection='3d') # 绘制三维曲面图
 # 在图形中添加一个子图，223 表示 2x2 网格中的第三个子图，projection='3d' 表示创建三维坐标轴
-x = np.linspace(-2, 2, 500)  # 生成在 -2 到 2 之间均匀分布的 500 个点，作为 x 轴数据（此处代码未完成，缺少 y 和 z 的定义以及曲面绘制代码）
+x = np.linspace(-2, 2, 500)  # 生成在 -2 到 2 之间均匀分布的 500 个点，作为 x 轴数据
 y = np.linspace(-2, 2, 500) # 生成 y 轴数据，在 -2 到 2 之间均匀分布 500 个点
 x, y = np.meshgrid(x, y) # 根据 x 和 y 的范围生成网格点坐标矩阵 这里假设 x 之前已经定义过，若未定义会报错，此代码片段可能是接着前面代码的
 z = np.sqrt(x ** 2 + y ** 2)    # 计算每个网格点对应的 z 值，z 为点 (x, y) 到原点的距离
