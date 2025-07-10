@@ -52,11 +52,9 @@ x和y可以是列表，也可以是数组，但二者的长度要保持一致，
 因此，完全可用NumPy来高效构造所需数据。下面我们结合NumPy对范例进行局部修改。
 """
 
-
 # nbSample = 256
 # x = np.linspace(-math.pi, math.pi, num=256)
 # y = np.sin(x)
-#
 # plt.plot(x, y)
 # plt.show()
 
@@ -254,29 +252,29 @@ axis：取值为['both' | 'x' | 'y']，表示在哪个轴添加网格线，可�
 如果以上参数的值都小于10，则可以连写在一起。例如前面的写法可简化为subplot(211)。
 """
 
-# def f(t):
-#     return np.exp(-t) * np.cos(2 * np.pi * t)  # 这是一个数学函数，表示阻尼振荡器的输出，即随着时间衰减的余弦波：
-#
-# t1 = np.arange(0.0,5.0,0.1)
-# t2 = np.arange(0.0,5.0,0.02)
-#
-# # 创建一个包含 2 行 1 列 子图的画布  axes: 包含两个 Axes 对象的数组，分别对应两个子图。
-# fig, axes = plt.subplots(2, 1, figsize=(8, 6))  # 指定整个画布（包含所有子图的窗口）的大小为宽8英寸、高6英寸。
-#
-# # 第一个子图
-# axes[0].plot(t1, f(t1), 'bo', t2, f(t2), 'k')  # 用蓝色圆圈 'bo' 画出稀疏的采样点。 用黑色实线 'k' 画出更平滑的曲线。
-# axes[0].set_title('Damped Oscillation')
-# axes[0].grid(True)
-#
-# # 第二个子图
-# axes[1].plot(t2, np.cos(2 * np.pi * t2), 'r--')
-# axes[1].set_title('Cosine Wave')
-# axes[1].grid(True)
-#
-# # 自动调整子图间距
-# plt.tight_layout()
-# # 显示图形
-# plt.show()
+def f(t):
+    return np.exp(-t) * np.cos(2 * np.pi * t)  # 这是一个数学函数，表示阻尼振荡器的输出，即随着时间衰减的余弦波：
+
+t1 = np.arange(0.0,5.0,0.1)
+t2 = np.arange(0.0,5.0,0.02)
+
+# 创建一个包含 2 行 1 列 子图的画布  axes: 包含两个 Axes 对象的数组，分别对应两个子图。
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))  # 指定整个画布（包含所有子图的窗口）的大小为宽8英寸、高6英寸。
+
+# 第一个子图
+axes[0].plot(t1, f(t1), 'bo', t2, f(t2), 'k')  # 用蓝色圆圈 'bo' 画出稀疏的采样点。 用黑色实线 'k' 画出更平滑的曲线。
+axes[0].set_title('Damped Oscillation')
+axes[0].grid(True)
+
+# 第二个子图
+axes[1].plot(t2, np.cos(2 * np.pi * t2), 'r--')
+axes[1].set_title('Cosine Wave')
+axes[1].grid(True)
+
+# 自动调整子图间距
+plt.tight_layout()
+# 显示图形
+plt.show()
 
 """
 Axes与Subplot的区别

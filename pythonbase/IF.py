@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import random
 
 while True:
@@ -67,7 +66,7 @@ for i in "123456":
     if i == "4":
         print("不好！")
         break
-=======
+
 import random
 
 while True:
@@ -136,4 +135,4 @@ for i in "123456":
     if i == "4":
         print("不好！")
         break
->>>>>>> 1ee27c175f430901a0371b8efc021416cc340850
+

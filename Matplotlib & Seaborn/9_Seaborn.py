@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -110,10 +111,194 @@ sns.heatmap()函数用来绘制热力图，annot是布尔类型参数，它是�
 square也是布尔类型参数，表示是否将输出的图形转化为正方形，默认输出长方形。
 """
 
+# TODO 3.boxplot（箱形图）
+"""
+箱形图的绘制方法在前面的范例中已经涉及，这里我们想利用Seaborn再次绘制箱形图，让各位读者从中感知Seaborn的优势。
+下面我们依然以经典的Iris（鸢尾花）数据集为例，说明如何利用Seaborn绘制箱形图。
+"""
+# sns.set(style='ticks')
+# iris = pd.read_csv("Iris-data.csv",header=None)
+# iris.columns = ['Id','SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm','Species']
+# sns.boxplot(x=iris["SepalLengthCm"],data=iris)
+# plt.show()
+
+"""
+本例使用了Seaborn内置的方法boxplot()来绘制箱形图。
+该方法的原型如下所示。该方法中的参数较多，我们挑选几个相对常用的给予简单介绍。
+x：指定X轴的数据，若不设置，默认为None。
+y：指定Y轴的数据，若不设置，默认为None。
+hue：字符串类型，它是DataFrame中某个代表类别的列名，boxplot()方法会将这个列中包含的不同属性值作为分类依据，不同分类对应不同颜色的箱体，以示区分。
+data：设置输入的数据集，可以是DataFrame对象，也可以是数组、数组列表等，是可选项。
+palette：调色板，控制图形的色调。
+order、hue_order：控制箱体的顺序。
+orient：取值为v、h，用于控制图像是水平（horizontal）显示，还是垂直（vertical）显示。
+"""
+# plt.rcParams['font.sans-serif'] = ['SimHei']    # 设置中文显示
+#
+# # 读取 CSV 文件
+# df = pd.read_csv("Iris-data.csv", header=None)
+# df.columns = ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+#
+#
+# df['SepalLengthCm'] = pd.to_numeric(df['SepalLengthCm'], errors='coerce')   # 强制转换 SepalLengthCm 为数值类型
+# df = df.dropna(subset=['SepalLengthCm'])    # 删除无效行
+# df['Species'] = df['Species'].astype('category')    # 确保 Species 是分类类型（可选）
+#
+# ax = sns.boxplot(x="Species", y="SepalLengthCm", data=df)   # 绘制箱线图
+# medians = df.pivot_table(index="Species", values="SepalLengthCm", aggfunc="median").values  # 计算每组的中位数
+#
+# # 统计每个物种的数量
+# nobs = df['Species'].value_counts().values
+# nobs = [str(x) for x in nobs.tolist()]
+# nobs = ["数量: " + i for i in nobs]
+#
+# pos = range(len(nobs))  # 设置标注位置
+#
+# # 在中位数线上方添加样本数量标注
+# for tick, label in zip(pos, ax.get_xticklabels()):
+#     ax.text(
+#         pos[tick],  # x 坐标
+#         medians[tick] + 0.03,  # y 坐标（中位数上方偏移 0.03）
+#         nobs[tick],  # 显示的文本
+#         horizontalalignment='center',
+#         size='x-small',
+#         color='w',
+#         weight='semibold'
+#     )
+#
+# # 显示图形
+# plt.show()
+
+"""
+从数据导入的方式可以看出，Seaborn和Pandas做了很好的集成，例如代码直接返回了一个DataFrame对象。
+我们可以按照操作DataFrame对象的方式来操作它。
+在功能上，第10行代码和如下代码（即利用分组聚合方式）是等价的，选择哪一种方式，
+就看你更喜欢哪种方式，但明显可以看出，利用透视表（pivot_table）能使代码更加具有可读性。
+如果仅仅关注于把鸢尾花三个种类的箱形图绘制出来，那么代码到第07行就可以结束了。
+第08行以后的代码，主要是为在中位数（50%处）横线上方显示每个子类的数量。
+碰巧的是，在这个鸢尾花数据集里，每个子类的数量都是50，在其他数据集中自然不会是这个数值。
+"""
+
+# TODO 4.violin plot（小提琴图）
+"""
+小提琴图和箱形图有点类似，它也可以显示四分位数（quartile）。
+不同于箱形图是通过长方形呈现的，以及绘图组件都对应实际的数据点，
+小提琴图集合了箱形图和密度图的特征，主要用来显示数据的分布状态，它能很好地表征了连续变量数据的分布情况。
+在外形上，因为所绘制的图形像一把把小提琴，故名“小提琴图”。
+小提琴图是用于观察多个数据分布情况的有效媒介，相比于箱形图，它在视觉上更令人愉悦。
+下面我们还是以熟悉的鸢尾花数据集为例，来说明小提琴图的绘制方法。
+"""
+# iris = pd.read_csv("Iris-data.csv")
+# iris.columns = ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+# print("数据集的列名：", iris.columns.tolist())
+#
+# # 强制转换 SepalLengthCm 为数值类型，并删除无效行
+# iris['SepalLengthCm'] = pd.to_numeric(iris['SepalLengthCm'], errors='coerce')
+# iris = iris.dropna(subset=['SepalLengthCm'])
+#
+# plt.figure(dpi=200)
+#
+# # 绘制小提琴图
+# # 确保 x 参数与数据集中的列名一致（注意大小写）
+# sns.violinplot(
+#     x='Species',  # 如果数据集中的列名是 "Species"，则使用大写 S
+#     y='SepalLengthCm',  # 列名应与数据集中的列名一致
+#     data=iris,
+#     scale='width',
+#     inner='quartile'
+# )
+#
+# # 设置标题并显示图形
+# plt.title('Violin Plot', fontsize=12)
+# plt.show()
+
+"""
+在小提琴图中，由于横线的宽度代表密度（就是这个值出现的频率），所以，我们可以很容易地观察到某个特征主要的密集分布区域。
+形象点来说，横向越“胖”，这个值就出现得越频繁。
+绘制小提琴图的方法是violinplot()，其原型如下。
+该方法参数众多，大多都能见名知意。这里，我们挑选几个重要的参数介绍如下。
+scale：可选参数，取值为area、count、width其中之一，主要用于调整小提琴图的缩放。
+area表示每个小提琴图拥有相同的面域，count根据样本数量来调节宽度，width表示每个小提琴图拥有相同的宽度。
+inner：可选参数，取值为box、quartile、point、stick、None其中之一，用于控制小提琴图内部数据点的形态。
+box表示绘制微型小提琴图，quartiles表示显示四分位分布，point、stick表示绘制点或小竖条，None表示绘制朴素的小提琴图。
+split：可选参数，布尔值，取值为True或False，表示是否将小提琴图从中间分开。
+"""
 
 
 
+# TODO 5.Density Plot（密度图）
+"""
+数据分析的重要目的之一在于，了解数据的基本性质，为后续的模型选择和模型训练提供依据。
+了解特征的分布，通常是机器学习的第一步，同时也是相当关键的一步。
+通常，我们会用核密度估计来掌握数据的基本分布情况。
+类似于小提琴图，基于核密度估计的密度图（Density Plot），是一种常用的可视化图形。
+这种密度图是将连续型随机变量分布情况可视化的利器。
+在密度图中，分布曲线上的每一个点都表示概率密度，分布曲线下的每一块面积都是特定变量区间发生的概率。
+下面，我们还是以鸢尾花数据集为例，说明三种不同品类鸢尾花的花瓣长度的概率密度分布。
+"""
+plt.rcParams['font.sans-serif'] = ['SimHei']
 
+iris = pd.read_csv("Iris-data.csv")
+iris.columns = ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
 
+# 强制转换 SepalLengthCm 为数值类型，并删除无效行
+iris['SepalLengthCm'] = pd.to_numeric(iris['SepalLengthCm'], errors='coerce')
+iris = iris.dropna(subset=['SepalLengthCm'])
 
+# 绘制 Iris-versicolor 的花萼长度密度图
+sns.kdeplot(iris.loc[iris['Species'] == 'Iris-versicolor', 'SepalLengthCm'],    # 筛选出物种为 Iris-versicolor 的花萼长度数据
+            shade=True,                 # shade=True 表示填充密度曲线下的区域
+            color="g",                  # color="g" 表示曲线和填充颜色为绿色
+            label="Iris-versicolor",    # label="Iris-versicolor" 设置图例标签
+            alpha=0.7                   # alpha=0.7 设置透明度为 0.7
+            )
+# 绘制 Iris-virginica 的花萼长度密度图
+sns.kdeplot(iris.loc[iris['Species'] == 'Iris-virginica', 'SepalLengthCm'],
+            shade=True,
+            color="deeppink",
+            label="Iris-virginica",
+            alpha=0.7
+            )
+# 绘制 Iris-setosa 的花萼长度密度图
+sns.kdeplot(iris.loc[iris['Species'] == 'Iris-setosa', 'SepalLengthCm'],
+            shade=True,
+            color="dodgerblue",
+            label="Iris-setosa",
+            alpha=0.7
+            )
 
+plt.title('鸢尾花花萼长度的密度图', fontsize=16)
+plt.legend()    # 图例
+plt.show()
+
+"""
+若要绘制密度图，需要用到Seaborn提供的一个专门方法kdeplot()，
+和其他Seaborn提供的绘图方法类似，它有很多好用的参数，其方法的原型如下。
+
+kdeplot(
+    data,                # 输入的数据集（DataFrame 或类似数组的对象）
+    data2=None,          # 可选的第二个数据集，用于绘制双变量核密度估计（如果需要）
+    shade=False,         # 是否填充密度曲线下的区域（默认为 False，不填充）
+    vertical=False,      # 是否垂直显示密度图（默认为 False，水平显示）
+    kernel='gau',        # 核密度估计使用的核函数类型，'gau' 表示高斯核
+    bw='scott',          # 带宽选择方法，'scott' 是 Scott's Rule 的带宽估计方法
+    gridsize=100,        # 用于绘制密度图的网格点数（默认为 100）
+    cut=3,               # 密度曲线绘制的截断参数，表示带宽的倍数（默认为 3）
+    clip=None,           # 可选的元组，用于指定密度估计的裁剪范围
+    legend=True,         # 是否显示图例（默认为 True）
+    cumulative=False,    # 是否绘制累积分布函数（CDF，默认为 False）
+    shade_lowest=True,   # 对于双变量图，是否填充最低密度区域（默认为 True）
+    cbar=False,          # 是否显示颜色条（仅适用于双变量图，默认为 False）
+    cbar_ax=None,        # 颜色条的子图位置（如果需要自定义）
+    cbar_kws=None,       # 传递给颜色条的关键字参数（字典形式）
+    ax=None,             # 指定的子图对象（如果需要在特定子图上绘制）
+    **kwargs             # 其他传递给底层绘图函数的关键字参数
+)
+
+下面我们简单介绍几个常用的参数。
+data、data2：这两个参数都用于指定绘图的数据源。如果除了X轴的数据，我们还想指定Y轴的数据，那么就要启用data2。
+shade：指明密度曲线内是否填充阴影。对于本例的第11～13行，如果这个参数设置为False，即不需要填充阴影，那么运行结果将如图8-53所示。
+vertical：布尔值，指定密度图的方向，默认为False（即非垂直显示）如果此值设置为True。
+垂直显示的密度图很显然，不论是基础款的Matplotlib，还是进阶版的Seaborn，它们所能绘制的可视化图，远远不是一本小书所能覆盖的。
+好在网络上有很多资源可供参考，这里推荐学有余力的读者参考《Matplotlib可视化最有价值的50个图表》，其中介绍的很多图形都非常美观。
+"""
